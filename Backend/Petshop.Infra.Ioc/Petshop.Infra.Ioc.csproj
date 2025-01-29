@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Petshop.Infra.Data\Petshop.Infra.Data.csproj" />
+    <ProjectReference Include="..\Petshop.Application\Petshop.Application.csproj" />
+    <ProjectReference Include="..\Petshop.Domain\Petshop.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
