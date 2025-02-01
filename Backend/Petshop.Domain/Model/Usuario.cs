@@ -40,7 +40,7 @@ namespace Petshop.Domain.Model
 
         public Usuario(string nome, string sobrenome, string numeroTelefone, string endereco, string email)
         {
-            ValidateDomain(nome,sobrenome,numeroTelefone,endereco,email);
+            ValidateDomain(nome, sobrenome, numeroTelefone, endereco, email);
         }
 
         public void ValidateDomain(string nome, string sobrenome, string numeroTelefone, string endereco, string email)
@@ -54,8 +54,14 @@ namespace Petshop.Domain.Model
 
         public void Update(string nome, string sobrenome, string numeroTelefone, string endereco, string email)
         {
-            ValidateDomain(nome,sobrenome,numeroTelefone,endereco,email);
-            AtualizacaoDeInformacoes = DateTime.Now;   
+            ValidateDomain(nome, sobrenome, numeroTelefone, endereco, email);
+            AtualizacaoDeInformacoes = DateTime.Now;
+        }
+
+        public void DefinirSenha(byte[] senhaHash, byte[] senhaSalt)
+        {
+            PasswordHash = senhaHash;
+            PasswordSalt = senhaSalt;
         }
 
     }
