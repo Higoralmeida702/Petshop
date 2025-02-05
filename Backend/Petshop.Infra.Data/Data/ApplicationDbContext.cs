@@ -12,7 +12,19 @@ namespace Petshop.Infra.Data.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        
+
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Animal> Animais { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Animal>()
+             .HasOne(a => a.Usuario)
+             .WithMany(u => u.Animais)
+             .HasForeignKey(a => a.UsuarioId);
+
+        }
     }
 }
