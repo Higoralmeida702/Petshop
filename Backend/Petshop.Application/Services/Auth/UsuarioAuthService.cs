@@ -83,8 +83,13 @@ namespace Petshop.Application.Services.Auth
                 respostaServico.Mensagem = error.Message;
                 respostaServico.Status = false;
             }
-                return respostaServico;
+            return respostaServico;
         }
-
+        
+        public async Task<bool> VerificaEmailJaCadastrado(RegistrarUsuarioDto registrarDto)
+        {
+            var usuario = await _usuarioRepository.ObterEmailAsync(registrarDto.Email);
+            return usuario != null;
+        }
     }
 }
