@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Petshop.Application.Interfaces;
 using Petshop.Application.Interfaces.Auth;
+using Petshop.Application.Services;
 using Petshop.Application.Services.Auth;
 using Petshop.Domain.Interfaces;
+using Petshop.Domain.Repository;
 using Petshop.Infra.Data.Data;
 using Petshop.Infra.Data.Repository;
 
@@ -19,6 +22,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ISenhaService, SenhaService>();
 builder.Services.AddScoped<IUsuarioAuthService, UsuarioAuthService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IAnimalService, AnimalService>();
+builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 
 //Swagger
 builder.Services.AddEndpointsApiExplorer();
