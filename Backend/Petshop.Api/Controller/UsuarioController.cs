@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Petshop.Application.Dto;
 using Petshop.Application.Interfaces.Auth;
 using Petshop.Application.Common.Responses;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 namespace Petshop.Api.Controller
 {
     [ApiController]
@@ -37,6 +39,41 @@ namespace Petshop.Api.Controller
             {
                 return BadRequest(resposta);
             }
+            return Ok(resposta);
+        }
+
+
+        [Authorize]
+        [HttpPut("atualizar-perfil")]
+        public async Task<IActionResult> AtualizarPerfil([FromBody] AtualizarInfoUsuarioDto infoUsuarioDto)
+        {
+            var usuarioIdClaim = User.FindFirst("id")?.Value;
+            if (string.IsNullOrEmpty(usuarioIdClaim))
+                return Unauthorized(new { Mensagem = "Usuário não autenticado!" });
+
+            int usuarioId = int.Parse(usuarioIdClaim);
+            var resposta = await _usuarioAuthService.AtualizarPerfil(usuarioId, infoUsuarioDto);
+
+            if (!resposta.Status)
+                return BadRequest(resposta);
+
+            return Ok(resposta);
+        }
+
+        [Authorize]
+        [HttpGet("obter-perfil")]
+        public async Task<IActionResult> ObterPerfil()
+        {
+            var usuarioIdClaim = User.FindFirst("id")?.Value;
+            if (string.IsNullOrEmpty(usuarioIdClaim))
+                return Unauthorized(new { Mensagem = "Usuário não autenticado!" });
+
+            int usuarioId = int.Parse(usuarioIdClaim);
+            var resposta = await _usuarioAuthService.ObterPerfil(usuarioId);
+
+            if (!resposta.Status)
+                return BadRequest(resposta);
+
             return Ok(resposta);
         }
     }
