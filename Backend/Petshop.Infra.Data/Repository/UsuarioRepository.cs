@@ -24,9 +24,21 @@ namespace Petshop.Infra.Data.Repository
             await _context.SaveChangesAsync();
         }
 
+
+
         public async Task<Usuario> ObterEmailAsync(string email)
         {
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task AtualizarInformacoesDoUsuario(Usuario usuario)
+        {
+            _context.Usuarios.Update(usuario);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<Usuario> ObterPorId(int id)
+        {
+            return await _context.Usuarios.FindAsync(id);
         }
     }
 }
