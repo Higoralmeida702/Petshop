@@ -9,7 +9,10 @@ namespace Petshop.Application.Interfaces.Auth
 {
     public interface IUsuarioAuthService
     {
-        Task<Resposta<RegistrarUsuarioDto>> Registrar (RegistrarUsuarioDto registrarDto);
-        Task<Resposta<string>> Login (LoginUsuarioDto loginDto);
+        Task<Resposta<RegistrarUsuarioDto>> Registrar(RegistrarUsuarioDto registrarDto);
+        Task<Resposta<string>> Login(LoginUsuarioDto loginDto);
+        Task<Resposta<AtualizarInfoUsuarioDto>> AtualizarPerfil(int usuarioId, AtualizarInfoUsuarioDto infoUsuarioDto);
+        Task<Resposta<AtualizarInfoUsuarioDto>> ObterPerfil(int usuarioId);
+
     }
 }

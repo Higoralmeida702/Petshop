@@ -10,5 +10,7 @@ namespace Petshop.Domain.Interfaces
     {
         Task AdicionarUsuarioAsync(Usuario usuario);
         Task<Usuario> ObterEmailAsync (string email);
+        Task AtualizarInformacoesDoUsuario(Usuario usuario);
+        Task<Usuario> ObterPorId (int id);
     }
 }
