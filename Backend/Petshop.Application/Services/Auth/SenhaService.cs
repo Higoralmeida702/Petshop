@@ -34,8 +34,7 @@ namespace Petshop.Application.Services.Auth
         {
             if (usuarioParametro is Usuario usuario)
             {
-
-                return CriarTokenBase(usuario.Email, usuario.Nome);
+                return CriarTokenBase(usuario.Id, usuario.Email, usuario.Nome);
             }
 
             throw new ArgumentException("Tipo de usuário inválido.");
@@ -50,10 +49,11 @@ namespace Petshop.Application.Services.Auth
             }
         }
 
-        private string CriarTokenBase(string email, string username)
+        private string CriarTokenBase(int id, string email, string username)
         {
             var claims = new List<Claim>
             {
+                new Claim("id", id.ToString()),
                 new Claim("Email", email),
                 new Claim("Username", username),
             };
