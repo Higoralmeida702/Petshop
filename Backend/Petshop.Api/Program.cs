@@ -10,16 +10,15 @@ using Petshop.Domain.Interfaces;
 using Petshop.Domain.Repository;
 using Petshop.Infra.Data.Data;
 using Petshop.Infra.Data.Repository;
+using Petshop.Infra.Ioc;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("Database");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -33,12 +32,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuer = false
     };
 });
-
-builder.Services.AddScoped<ISenhaService, SenhaService>();
-builder.Services.AddScoped<IUsuarioAuthService, UsuarioAuthService>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IAnimalService, AnimalService>();
-builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
