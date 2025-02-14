@@ -25,6 +25,14 @@ namespace Petshop.Infra.Data.Data
              .WithMany(u => u.Animais)
              .HasForeignKey(a => a.UsuarioId);
 
+            modelBuilder.Entity<Animal>()
+             .Property(s => s.Genero)
+             .HasConversion<string>();
+
+             modelBuilder.Entity<Animal>()
+             .Property(s => s.AnimalCategoria)
+             .HasConversion<string>();
+
         }
-    }
+    }   
 }
