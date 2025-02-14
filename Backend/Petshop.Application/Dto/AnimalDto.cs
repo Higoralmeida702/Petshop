@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Petshop.Domain.Enum;
 
 namespace Petshop.Application.Dto
 {
@@ -27,6 +28,12 @@ namespace Petshop.Application.Dto
         [Required(ErrorMessage = "O comprimento é obrigatório.")]
         [Range(1, double.MaxValue, ErrorMessage = "O comprimento deve ser maior que zero.")]
         public decimal Comprimento { get; set; }
+
+        [Required(ErrorMessage = "É necessario preencher o campo informando que categoria o animal pertence")]
+        public AnimalCategoriaEnum AnimalCategoria { get; set; }
+
+        [Required(ErrorMessage = "É necessario preeencher o campo informando o genero do animal")]
+        public GeneroEnum Genero { get; set; }
 
         [Required(ErrorMessage = "O ID do usuário é obrigatório.")]
         public int UsuarioId { get; set; }
