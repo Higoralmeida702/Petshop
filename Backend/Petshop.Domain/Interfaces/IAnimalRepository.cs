@@ -9,5 +9,7 @@ namespace Petshop.Domain.Repository
     public interface IAnimalRepository
     {
         Task<Animal> AdicionarPet (Animal animal); 
+        Task<List<Animal>> ObterTodosAnimais ();
+        Task<Animal> DeletarAnimal (int id);
     }
 }
