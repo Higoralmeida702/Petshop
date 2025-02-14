@@ -31,8 +31,25 @@ namespace Petshop.Api.Controller
             var animal = await _animalService.AdicionarPet(animalDto);
 
             return Ok(animal);
-
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<Animal>>> ObterTodos()
+        {
+            var animais = await _animalService.ObterTodosAnimais();
+            return Ok(animais);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarAnimal(int id)
+        {
+            var resposta = await _animalService.DeletarAnimal(id);
+            if (!resposta.Status)
+            {
+                return NotFound(resposta.Mensagem);
+            }
+
+            return Ok(resposta);
+        }
     }
 }
