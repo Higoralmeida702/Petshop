@@ -12,8 +12,8 @@ using Petshop.Infra.Data.Data;
 namespace Petshop.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250205002024_AddTabelaAnimal-E-AjustesEmUsuario")]
-    partial class AddTabelaAnimalEAjustesEmUsuario
+    [Migration("20250212151542_AddEnumsNaTabelaAnimal")]
+    partial class AddEnumsNaTabelaAnimal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,14 +33,14 @@ namespace Petshop.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Altura")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("AnimalCategoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("AtualizacaoDeInformacoes")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Comprimento")
-                        .HasMaxLength(50)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Cor")
@@ -50,6 +50,10 @@ namespace Petshop.Infra.Data.Migrations
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Genero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

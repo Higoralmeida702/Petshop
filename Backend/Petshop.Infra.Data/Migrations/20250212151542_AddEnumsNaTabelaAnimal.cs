@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Petshop.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTabelaAnimalEAjustesEmUsuario : Migration
+    public partial class AddEnumsNaTabelaAnimal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,8 +42,9 @@ namespace Petshop.Infra.Data.Migrations
                     Cor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Raca = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Altura = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Comprimento = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
+                    Comprimento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AnimalCategoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AtualizacaoDeInformacoes = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
