@@ -1,0 +1,72 @@
+.tituloHome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8rem;
+    font-size: 49px;
+    letter-spacing: 2px;
+}
+
+.cachorroImgBackground {
+    position: fixed;
+    right: -200px;
+    top: 0px;
+    transform: scaleX(-1);
+    background-image: url('/public/images/taylor-kopel-WX4i1Jq_o0Y-unsplash-removebg.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1000px;
+    height: 2000px;
+}
+
+.introducaoHome {
+    font-size: 32px;
+    margin-top: 13rem;
+    margin-left: 8rem;
+}
+
+.introducaoHomeConteudo p {
+    margin: 15px 0px;
+}
+
+.classesAnimaisAtendidos {
+    margin: 8rem 8rem;
+}
+
+.classesAnimaisAtendidosGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: max-content;
+    gap: 100px;
+}
+
+.imgSvgAnimais {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.imgSvgAnimais img {
+    width: 100px;
+    height: 50px;
+}
+
+.btnAvancar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1.9px;
+    margin-top: 6rem;
+    width: 220px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #3F4F44;
+    color: #fff;
+}
+
+.btnAvancar:hover {
+    background-color: #2C3930;
+}
