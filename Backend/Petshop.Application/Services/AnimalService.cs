@@ -29,7 +29,7 @@ namespace Petshop.Application.Services
                 animalDto.Raca,
                 animalDto.Peso,
                 animalDto.Comprimento,
-                animalDto.UsuarioId,
+                animalDto.ClienteId,
                 animalDto.AnimalCategoria,
                 animalDto.Genero
             );

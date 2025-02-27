@@ -10,7 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Petshop.Application.Interfaces.Auth;
 using Petshop.Domain.Model;
 
-namespace Petshop.Application.Services.Auth
+
+/*namespace Petshop.Application.Services.Auth
 {
     public class SenhaService : ISenhaService
     {
@@ -77,3 +78,4 @@ namespace Petshop.Application.Services.Auth
         }
     }
 }
+*/

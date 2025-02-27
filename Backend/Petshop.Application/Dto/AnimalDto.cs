@@ -35,7 +35,7 @@ namespace Petshop.Application.Dto
         [Required(ErrorMessage = "É necessario preeencher o campo informando o genero do animal")]
         public GeneroEnum Genero { get; set; }
 
-        [Required(ErrorMessage = "O ID do usuário é obrigatório.")]
-        public int UsuarioId { get; set; }
+        [Required(ErrorMessage = "O ID do cliente é obrigatório.")]
+        public int ClienteId { get; set; }
     }
 }

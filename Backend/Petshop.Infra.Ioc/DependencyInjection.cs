@@ -26,9 +26,9 @@ namespace Petshop.Infra.Ioc
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
 
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<ISenhaService, SenhaService>();
-            services.AddScoped<IUsuarioAuthService, UsuarioAuthService>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            //services.AddScoped<ISenhaService, SenhaService>();
+            services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<IAnimalRepository, AnimalRepository>();
 

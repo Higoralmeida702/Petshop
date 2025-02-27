@@ -6,30 +6,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Petshop.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddEnumsNaTabelaAnimal : Migration
+    public partial class AddCorrecoesNomeclaturas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Clientes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Sobrenome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NumeroTelefone = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     CriacaoConta = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AtualizacaoDeInformacoes = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    AtualizacaoDeInformacoes = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,23 +43,23 @@ namespace Petshop.Infra.Data.Migrations
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AtualizacaoDeInformacoes = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Animais", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Animais_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        name: "FK_Animais_Clientes_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clientes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Animais_UsuarioId",
+                name: "IX_Animais_ClienteId",
                 table: "Animais",
-                column: "UsuarioId");
+                column: "ClienteId");
         }
 
         /// <inheritdoc />
@@ -73,7 +69,7 @@ namespace Petshop.Infra.Data.Migrations
                 name: "Animais");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Clientes");
         }
     }
 }

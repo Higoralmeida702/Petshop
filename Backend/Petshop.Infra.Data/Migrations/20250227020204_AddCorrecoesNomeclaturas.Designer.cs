@@ -12,8 +12,8 @@ using Petshop.Infra.Data.Data;
 namespace Petshop.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212151542_AddEnumsNaTabelaAnimal")]
-    partial class AddEnumsNaTabelaAnimal
+    [Migration("20250227020204_AddCorrecoesNomeclaturas")]
+    partial class AddCorrecoesNomeclaturas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace Petshop.Infra.Data.Migrations
 
                     b.Property<DateTime>("AtualizacaoDeInformacoes")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Comprimento")
                         .HasColumnType("decimal(18,2)");
@@ -68,17 +71,14 @@ namespace Petshop.Infra.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Animais");
                 });
 
-            modelBuilder.Entity("Petshop.Domain.Model.Usuario", b =>
+            modelBuilder.Entity("Petshop.Domain.Model.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,11 +91,6 @@ namespace Petshop.Infra.Data.Migrations
 
                     b.Property<DateTime>("CriacaoConta")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -112,36 +107,23 @@ namespace Petshop.Infra.Data.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Sobrenome")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Petshop.Domain.Model.Animal", b =>
                 {
-                    b.HasOne("Petshop.Domain.Model.Usuario", "Usuario")
+                    b.HasOne("Petshop.Domain.Model.Cliente", "Cliente")
                         .WithMany("Animais")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("Petshop.Domain.Model.Usuario", b =>
+            modelBuilder.Entity("Petshop.Domain.Model.Cliente", b =>
                 {
                     b.Navigation("Animais");
                 });

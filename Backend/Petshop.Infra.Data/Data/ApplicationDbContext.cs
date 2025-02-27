@@ -13,7 +13,7 @@ namespace Petshop.Infra.Data.Data
         {
         }
 
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Animal> Animais { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace Petshop.Infra.Data.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Animal>()
-             .HasOne(a => a.Usuario)
+             .HasOne(a => a.Cliente)
              .WithMany(u => u.Animais)
-             .HasForeignKey(a => a.UsuarioId);
+             .HasForeignKey(a => a.ClienteId);
 
             modelBuilder.Entity<Animal>()
              .Property(s => s.Genero)
