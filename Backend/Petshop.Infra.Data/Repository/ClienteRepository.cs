@@ -24,14 +24,44 @@ namespace Petshop.Infra.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task AtualizarInformacoesDoCliente(Cliente cliente)
+        public async Task<Cliente> DeletarCliente(int id)
         {
-            _context.Clientes.Update(cliente);
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
+            {
+                return null;
+            }
+
+            _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
+            return cliente;
         }
+
+        public async Task<Cliente> EditarCliente(int id, Cliente cliente)
+        {
+            var clienteExistente = await _context.Clientes.FindAsync(id);
+            if (clienteExistente == null)
+            {
+                return null;
+            }
+
+            clienteExistente.Update(cliente.Nome, cliente.NumeroTelefone, cliente.Endereco );
+
+            _context.Clientes.Update(clienteExistente);
+            await _context.SaveChangesAsync();
+            return clienteExistente;
+        }
+
         public async Task<Cliente> ObterPorId(int id)
         {
             return await _context.Clientes.FindAsync(id);
         }
+
+        public async Task<List<Cliente>> ObterTodosClientes()
+        {
+            return await _context.Clientes.ToListAsync();
+        }
+
+
     }
 }

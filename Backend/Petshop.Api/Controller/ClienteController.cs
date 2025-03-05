@@ -30,5 +30,60 @@ namespace Petshop.Api.Controller
             return Ok(resposta);
         }
 
+
+        [HttpGet("BuscarClientePor/{id}")]
+        public async Task<IActionResult> ObterClientePorId(int id)
+        {
+            var resposta = await _clienteService.ObterPorId(id);
+
+            if (!resposta.Status)
+            {
+                return NotFound(new { mensagem = resposta.Mensagem });
+            }
+
+            return Ok(resposta);
+        }
+
+        [HttpGet("ObterTodosClientes")]
+        public async Task<IActionResult> ObterTodosClientes()
+        {
+            try
+            {
+                var clientes = await _clienteService.ObterTodosClientes();
+
+                if (clientes == null || clientes.Count == 0)
+                {
+                    return NotFound(new { mensagem = "Nenhum cliente encontrado." });
+                }
+
+                return Ok(clientes);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = $"Erro interno: {ex.Message}" });
+            }
+        }
+
+        [HttpDelete("DeletarCliente/{id}")]
+        public async Task<IActionResult> DeletarCliente(int id)
+        {
+            var resposta = await _clienteService.DeletarCliente(id);
+
+            if (!resposta.Status)
+            {
+                return NotFound(new { mensagem = resposta.Mensagem });
+            }
+
+            return Ok(new { mensagem = "Cliente deletado com sucesso.", cliente = resposta.Dados });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditarCliente(int id, [FromBody] RegistrarClienteDto clienteDto)
+        {
+            var resposta = await _clienteService.EditarCliente(id, clienteDto);
+            if (resposta.Status)
+                return Ok(resposta);
+            return BadRequest(resposta);
+        }
     }
 }

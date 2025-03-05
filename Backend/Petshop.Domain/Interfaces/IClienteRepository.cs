@@ -10,5 +10,8 @@ namespace Petshop.Domain.Interfaces
     {
         Task AdicionarClienteAsync(Cliente cliente);
         Task<Cliente> ObterPorId (int id);
+        Task<List<Cliente>> ObterTodosClientes();
+        Task<Cliente> DeletarCliente (int id);
+        Task<Cliente> EditarCliente (int id, Cliente cliente); 
     }
 }
