@@ -42,7 +42,7 @@ namespace Petshop.Domain.Model
         [Required(ErrorMessage = "É obrigatório preencher o campo Gênero")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public GeneroEnum Genero { get; private set; }
-    
+        
         public DateTime DataCriacao { get; private set; } = DateTime.Now;
         public DateTime AtualizacaoDeInformacoes { get; private set; } = DateTime.Now;
 
@@ -50,6 +50,8 @@ namespace Petshop.Domain.Model
 
         [Required (ErrorMessage = "É obrigatório preencher o campo cliente Id ")]
         public int ClienteId { get; private set; }
+
+        public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
 
 
         public Animal(string nome, string cor, string raca, decimal peso, decimal comprimento, int clienteId, AnimalCategoriaEnum animalCategoria, GeneroEnum genero)
