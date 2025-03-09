@@ -31,6 +31,8 @@ namespace Petshop.Infra.Ioc
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<IAnimalRepository, AnimalRepository>();
+            services.AddScoped<IConsultaService, ConsultaService>();
+            services.AddScoped<IConsultaRepository, ConsultaRepository>();
 
 
             return services;
