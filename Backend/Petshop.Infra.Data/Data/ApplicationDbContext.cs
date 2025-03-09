@@ -15,6 +15,7 @@ namespace Petshop.Infra.Data.Data
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Animal> Animais { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,10 +30,27 @@ namespace Petshop.Infra.Data.Data
              .Property(s => s.Genero)
              .HasConversion<string>();
 
-             modelBuilder.Entity<Animal>()
+            modelBuilder.Entity<Animal>()
              .Property(s => s.AnimalCategoria)
              .HasConversion<string>();
 
+            modelBuilder.Entity<Consulta>()
+            .HasOne(a => a.Animal)
+            .WithMany(u => u.Consultas)
+            .HasForeignKey(a => a.AnimalId);
+
+            modelBuilder.Entity<Consulta>()
+            .Property(s => s.Exame)
+            .HasConversion<string>();
+
+            modelBuilder.Entity<Consulta>()
+            .Property(s => s.StatusConsulta)
+            .HasConversion<string>();
+
+            modelBuilder.Entity<Consulta>()
+            .Property(s => s.StatusExame)
+            .HasConversion<string>();
+
         }
-    }   
+    }
 }
