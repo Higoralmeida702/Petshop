@@ -109,6 +109,45 @@ namespace Petshop.Infra.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("Petshop.Domain.Model.Consulta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AgendarDia")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CriacaoConsulta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Exame")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusConsulta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusExame")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("Consultas");
+                });
+
             modelBuilder.Entity("Petshop.Domain.Model.Animal", b =>
                 {
                     b.HasOne("Petshop.Domain.Model.Cliente", "Cliente")
@@ -118,6 +157,22 @@ namespace Petshop.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Petshop.Domain.Model.Consulta", b =>
+                {
+                    b.HasOne("Petshop.Domain.Model.Animal", "Animal")
+                        .WithMany("Consultas")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+                });
+
+            modelBuilder.Entity("Petshop.Domain.Model.Animal", b =>
+                {
+                    b.Navigation("Consultas");
                 });
 
             modelBuilder.Entity("Petshop.Domain.Model.Cliente", b =>

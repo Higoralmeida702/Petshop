@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Petshop.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCorrecoesNomeclaturas : Migration
+    public partial class AddConsulta : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,15 +56,48 @@ namespace Petshop.Infra.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Consultas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Exame = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusConsulta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusExame = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgendarDia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CriacaoConsulta = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AnimalId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consultas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Consultas_Animais_AnimalId",
+                        column: x => x.AnimalId,
+                        principalTable: "Animais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Animais_ClienteId",
                 table: "Animais",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consultas_AnimalId",
+                table: "Consultas",
+                column: "AnimalId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Consultas");
+
             migrationBuilder.DropTable(
                 name: "Animais");
 
