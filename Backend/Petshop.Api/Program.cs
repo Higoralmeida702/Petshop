@@ -46,6 +46,16 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirCors", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 
 app.UseSwagger();
@@ -53,7 +63,7 @@ app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Petshop API V1");
 });
-
+app.UseCors("PermitirCors"); 
 app.UseAuthentication();
 app.UseAuthorization();
 
