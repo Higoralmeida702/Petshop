@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Consultas = () => {
   const [consultas, setConsultas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [editingConsulta, setEditingConsulta] = useState(null);
   const [form, setForm] = useState({
     exame: "",
@@ -80,7 +81,7 @@ const Consultas = () => {
         });
         if (!response.ok) throw new Error("Erro ao adicionar: " + response.statusText);
       }
-      await fetchConsultas(); 
+      await fetchConsultas();
       setEditingConsulta(null);
       setForm({ exame: "", statusConsulta: "", statusExame: "", agendarDia: "", valor: "", animalId: "" });
     } catch (error) {
@@ -110,10 +111,29 @@ const Consultas = () => {
     }
   };
 
+  const filteredConsultas = consultas.filter((consulta) => {
+    const searchTermLower = searchTerm.toLowerCase();
+    return (
+      consulta.exame.toLowerCase().includes(searchTermLower) ||
+      consulta.statusConsulta.toLowerCase().includes(searchTermLower) ||
+      consulta.statusExame.toLowerCase().includes(searchTermLower) ||
+      consulta.agendarDia.toLowerCase().includes(searchTermLower)
+    );
+  });
+
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Lista de Consultas</h1>
-      {consultas.length > 0 ? (
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Buscar por exame, status ou dia"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      {filteredConsultas.length > 0 ? (
         <table className="table table-striped">
           <thead>
             <tr>
@@ -128,7 +148,7 @@ const Consultas = () => {
             </tr>
           </thead>
           <tbody>
-            {consultas.map((consulta) => (
+            {filteredConsultas.map((consulta) => (
               <tr key={consulta.id}>
                 <td>{consulta.id}</td>
                 <td>{consulta.exame}</td>
@@ -215,6 +235,8 @@ const Consultas = () => {
         </div>
       </div>
     </div>
+
+
   );
 };
 
